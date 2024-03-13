@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 // Функция для подсчета суммы цифр числа
 int sumOfDigits(int num) {
@@ -35,16 +37,28 @@ void sortByDigitSum(int arr[], int n) {
     }
 }
 
-int main() {
-    int n;
-    printf("Введите размерность массива: ");
-    scanf("%d", &n);
+int main(int argc, char* argv[]) {
+    if (argc < 2) {
+        printf("Usage: %s <array_size>\n", argv[0]);
+        return 1;
+    }
+
+    int n = atoi(argv[1]);
+    if (n <= 0) {
+        printf("Invalid array size\n");
+        return 1;
+    }
 
     int arr[n];
-    printf("Введите элементы массива:\n");
+
+    srand(time(NULL));
+
+    printf("Исходный массив:\n");
     for (int i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
+        arr[i] = rand() % 1000;
+        printf("%d ", arr[i]);
     }
+    printf("\n");
 
     sortByDigitSum(arr, n);
 
